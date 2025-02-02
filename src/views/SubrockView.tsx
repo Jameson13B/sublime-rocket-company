@@ -1,9 +1,11 @@
+import { Dispatch, SetStateAction } from "react"
 import { Button, Image, Statistic, Typography } from "antd"
 import { DownOutlined } from "@ant-design/icons"
-import { Container } from "../components/Container"
+
+import { isMobile } from "../const"
 import subrock from "../assets/SR-01_Silo.png"
-import { SetStateAction } from "react"
-import { Dispatch } from "react"
+
+import { Container } from "../components/Container"
 
 const { Title } = Typography
 
@@ -14,13 +16,12 @@ type SubrockViewTypes = {
 export const SubrockView = ({ setView }: SubrockViewTypes) => {
   return (
     <div>
-      <Title level={2}>Subrock</Title>
       <Container>
         <Title
           level={3}
           style={{
             color: "#bada55",
-            marginTop: "22rem",
+            marginTop: isMobile ? "13rem" : "22rem",
           }}
         >
           SubRock by Sublime Rocket Co
@@ -31,7 +32,7 @@ export const SubrockView = ({ setView }: SubrockViewTypes) => {
         <DownOutlined style={{ fontSize: "1.5rem" }} />
       </Container>
       <Container>
-        <div style={statisticContainerStyle}>
+        <div style={statisticContainerRightStyle}>
           <Statistic
             style={statisticStyle}
             title="SR01"
@@ -43,19 +44,19 @@ export const SubrockView = ({ setView }: SubrockViewTypes) => {
         </div>
       </Container>
       <Container>
-        <div style={statisticContainerStyle}>
-          <div style={imageStyle}>
-            <Image preview={false} src={subrock} />
-          </div>
+        <div style={statisticContainerLeftStyle}>
           <Statistic
             style={statisticLeftStyle}
             title="SR02"
             value="SR02 is the first color rocket we designed and 3D printed. It is a multi-color rocket with 95% reusability. Created in January 2025."
           />
+          <div style={imageStyle}>
+            <Image preview={false} src={subrock} />
+          </div>
         </div>
       </Container>
-      <Container last={true}>
-        <div style={statisticContainerStyle}>
+      <Container>
+        <div style={statisticContainerRightStyle}>
           <Statistic
             style={statisticAltStyle}
             title="Future Launches"
@@ -92,35 +93,49 @@ export const SubrockView = ({ setView }: SubrockViewTypes) => {
 
 const statisticStyle: React.CSSProperties = {
   margin: "0 auto",
-  width: "48%",
-  marginRight: "4%",
+  marginRight: isMobile ? "auto" : "4%",
+  marginBottom: isMobile ? "2rem" : "0",
+  paddingTop: isMobile ? "4rem" : "0",
+  width: isMobile ? "80%" : "48%",
 }
 const statisticLeftStyle: React.CSSProperties = {
   margin: "0 auto",
-  marginLeft: "4%",
-  width: "48%",
+  marginLeft: isMobile ? "auto" : "4%",
+  marginBottom: isMobile ? "2rem" : "0",
+  paddingTop: isMobile ? "4rem" : "0",
+  width: isMobile ? "80%" : "48%",
 }
 const statisticAltStyle: React.CSSProperties = {
   margin: "0 auto",
-  marginRight: "4%",
-  width: "63%",
+  marginRight: isMobile ? "auto" : "4%",
+  marginBottom: isMobile ? "2rem" : "0",
+  paddingTop: isMobile ? "4rem" : "0",
+  width: isMobile ? "80%" : "63%",
 }
 
-const statisticContainerStyle: React.CSSProperties = {
+const statisticContainerRightStyle: React.CSSProperties = {
   display: "flex",
+  flexDirection: isMobile ? "column" : "row",
   justifyContent: "space-between",
   alignItems: "center",
   maxWidth: "900px",
   margin: "0 auto",
 }
-
+const statisticContainerLeftStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: isMobile ? "column" : "row-reverse",
+  justifyContent: "space-between",
+  alignItems: "center",
+  maxWidth: "900px",
+  margin: "0 auto",
+}
 const imageStyle: React.CSSProperties = {
   backdropFilter: "blur(20px)",
   borderRadius: "5rem 3rem 7rem 1rem",
   backgroundColor: "#bada55",
   display: "flex",
   alignItems: "center",
-  width: "48%",
+  width: isMobile ? "50%" : "48%",
 }
 const ctaStyles: React.CSSProperties = {
   backdropFilter: "blur(20px)",
@@ -130,5 +145,5 @@ const ctaStyles: React.CSSProperties = {
   flexDirection: "column",
   alignItems: "flex-start",
   padding: "3rem 2.5rem",
-  width: "33%",
+  width: isMobile ? "75%" : "33%",
 }

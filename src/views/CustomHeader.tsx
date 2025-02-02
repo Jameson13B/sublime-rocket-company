@@ -1,5 +1,6 @@
 import { Typography } from "antd"
 import "../App.css"
+import { isMobile } from "../const"
 
 const { Title } = Typography
 
@@ -9,16 +10,25 @@ type CustomHeaderProps = {
 }
 
 export const CustomHeader = ({ setView, view }: CustomHeaderProps) => {
+  const handleViewChange = (
+    view: "home" | "subrock" | "launches" | "mission"
+  ) => {
+    const content = document.getElementById("content")
+    setView(view)
+    if (content) content.scrollTop = 0
+  }
+  const handleStyleGeneration = (
+    variable: "home" | "subrock" | "launches" | "mission"
+  ) => ({
+    ...noMargin,
+    borderBottom: variable === view ? `3px solid #bada55` : "none",
+  })
+
   return (
     <div style={headerStyle}>
       <Title
         style={{ ...noMargin, cursor: "pointer", color: "#bada55" }}
-        onClick={() => {
-          const content = document.getElementById("content")
-
-          setView("home")
-          if (content) content.scrollTop = 0
-        }}
+        onClick={() => handleViewChange("home")}
       >
         Sublime Rocket Co.
       </Title>
@@ -26,48 +36,24 @@ export const CustomHeader = ({ setView, view }: CustomHeaderProps) => {
         <Title
           className="navLink"
           level={5}
-          style={{
-            ...noMargin,
-            borderBottom: view === "subrock" ? `3px solid #bada55` : "none",
-          }}
-          onClick={() => {
-            const content = document.getElementById("content")
-
-            setView("subrock")
-            if (content) content.scrollTop = 0
-          }}
+          style={handleStyleGeneration("subrock")}
+          onClick={() => handleViewChange("subrock")}
         >
           SubRock
         </Title>
         <Title
           className="navLink"
           level={5}
-          style={{
-            ...noMargin,
-            borderBottom: view === "launches" ? `3px solid #bada55` : "none",
-          }}
-          onClick={() => {
-            const content = document.getElementById("content")
-
-            setView("launches")
-            if (content) content.scrollTop = 0
-          }}
+          style={handleStyleGeneration("launches")}
+          onClick={() => handleViewChange("launches")}
         >
           Launches
         </Title>
         <Title
           className="navLink"
           level={5}
-          style={{
-            ...noMargin,
-            borderBottom: view === "mission" ? `3px solid #bada55` : "none",
-          }}
-          onClick={() => {
-            const content = document.getElementById("content")
-
-            setView("mission")
-            if (content) content.scrollTop = 0
-          }}
+          style={handleStyleGeneration("mission")}
+          onClick={() => handleViewChange("mission")}
         >
           Mission
         </Title>
@@ -78,6 +64,7 @@ export const CustomHeader = ({ setView, view }: CustomHeaderProps) => {
 
 const headerStyle: React.CSSProperties = {
   display: "flex",
+  flexDirection: isMobile ? "column" : "row",
   alignItems: "center",
   justifyContent: "space-between",
   width: "100%",

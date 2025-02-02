@@ -1,3 +1,5 @@
+import { isMobile } from "../const"
+
 export const Container = ({
   bgColor = "transparent",
   bgImage = null,
@@ -11,7 +13,8 @@ export const Container = ({
   last?: boolean
   children: React.ReactNode
 }) => {
-  const height = last ? "75dvh" : "100dvh"
+  const height = last ? "75dvh" : isMobile ? "90dvh" : "100dvh"
+
   return (
     <div
       style={{
@@ -20,6 +23,7 @@ export const Container = ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        padding: "0 24px",
       }}
     >
       <div

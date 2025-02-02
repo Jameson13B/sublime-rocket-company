@@ -1,11 +1,11 @@
 import { Statistic, Typography } from "antd"
 import { DownOutlined } from "@ant-design/icons"
+
+import { isMobile, rocketsBuilt, completedLaunches } from "../const"
+
 import { Container } from "../components/Container"
 
 const { Title } = Typography
-
-const rocketsBuilt = 1
-const completedLaunches = 0
 
 export const MissionView = () => {
   return (
@@ -15,9 +15,11 @@ export const MissionView = () => {
         margin: "0 auto",
       }}
     >
-      <Title level={2}>Our Mission</Title>
       <Container>
-        <Title level={3} style={{ marginTop: "22rem", color: "#bada55" }}>
+        <Title
+          level={3}
+          style={{ marginTop: isMobile ? "13rem" : "22rem", color: "#bada55" }}
+        >
           Memories and Magic
         </Title>
         <Title level={4} style={{ color: "#fff", marginBottom: "3rem" }}>
@@ -71,6 +73,7 @@ const statistic2Style: React.CSSProperties = {
 }
 const statisticContainerStyle: React.CSSProperties = {
   display: "flex",
+  alignItems: "center",
   justifyContent: "space-between",
   width: "100%",
 }

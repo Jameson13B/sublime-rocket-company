@@ -1,6 +1,8 @@
 import { Button, Typography } from "antd"
 import { DownOutlined } from "@ant-design/icons"
 
+import { isMobile } from "../const"
+
 import { Container } from "../components/Container"
 import Sr01Silo from "../assets/SR-01_Silo.png"
 import { Dispatch } from "react"
@@ -14,8 +16,7 @@ export const HomeView = ({
   setView: Dispatch<SetStateAction<"home" | "subrock" | "launches" | "mission">>
 }) => {
   return (
-    <div>
-      <Title level={2}>Home</Title>
+    <div style={{ width: "100%" }}>
       <Container>
         <Title
           level={3}
@@ -25,7 +26,7 @@ export const HomeView = ({
             if (content) content.scrollTop = 0
           }}
           style={{
-            marginTop: "22rem",
+            marginTop: isMobile ? "13rem" : "22rem",
             color: "#bada55",
             cursor: "pointer",
           }}
@@ -33,11 +34,11 @@ export const HomeView = ({
           SubRock by Sublime Rocket Co
         </Title>
         <Title level={4} style={{ color: "#fff", marginBottom: "3rem" }}>
-          The rocket that started it all
+          Learn about our rocket
         </Title>
         <DownOutlined style={{ fontSize: "1.5rem" }} />
       </Container>
-      <Container doubleHeight={true}>
+      <Container bgColor="#bada55" doubleHeight={true}>
         <div style={containerStyle}>
           <div style={imageContainerStyle} />
           <div style={textContainerStyle}>
@@ -104,13 +105,12 @@ export const HomeView = ({
 }
 
 const containerStyle: React.CSSProperties = {
-  backgroundColor: "rgb(186, 218, 85, 0.85)",
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "center",
   height: "100%",
-  width: "100vw",
+  width: "100%",
 }
 
 const imageContainerStyle: React.CSSProperties = {

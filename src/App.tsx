@@ -1,6 +1,8 @@
 import { useState } from "react"
-import { ConfigProvider, Layout, theme } from "antd"
+import { ConfigProvider, Layout } from "antd"
+
 import "./App.css"
+import { customTheme } from "./const"
 
 import { CustomHeader } from "./views/CustomHeader"
 import { CustomFooter } from "./views/CustomFooter"
@@ -10,23 +12,6 @@ import { LaunchesView } from "./views/LaunchesView"
 import { MissionView } from "./views/MissionView"
 
 const { Header, Content, Footer } = Layout
-const customTheme = {
-  algorithm: theme.darkAlgorithm,
-  components: {
-    Layout: {
-      headerBg: "#242424",
-      bodyBg: "#242424",
-      footerBg: "#242424",
-    },
-    Statistic: {
-      contentFontSize: 48,
-      titleFontSize: 28,
-    },
-  },
-  token: {
-    fontFamily: "Helvetica, Arial, sans-serif",
-  },
-}
 
 function App() {
   const [view, setView] = useState<"home" | "subrock" | "launches" | "mission">(
